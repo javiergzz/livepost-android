@@ -1,0 +1,10 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="red_delete">#F00</color>
+    <color name="green_edit">#0F0</color>
+    <color name="list_background">#ced2ce</color>
+    <color name="dark_grey">#222</color>
+    <color name="grey">#333</color>
+    <color name="light_grey">#EEE</color>
+</resources>

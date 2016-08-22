@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    card_view:cardCornerRadius="@dimen/card_corner_radius"
+    card_view:cardElevation="@dimen/card_elevation">
+<com.livepost.javiergzzr.specialViews.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipeSurface"
+    android:layout_width="match_parent"
+    android:layout_height="75dp">
+    <!-- Surface View Start -->
+<LinearLayout
+        android:id="@+id/bottom_wrapper"
+        android:orientation="horizontal"
+        android:padding="0dp"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:gravity="center"
+        android:background="@color/red_delete">
+    <ImageButton
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/red_delete"
+        android:src="@drawable/ic_delete_white_48dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:gravity="center"
+        android:background="@color/green_edit">
+    <ImageButton
+        android:id="@+id/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/green_edit"
+        android:src="@drawable/ic_mode_edit_white_48dp"/>
+    </LinearLayout>
+        <!--What you want to show in SurfaceView-->
+</LinearLayout>
+    <!-- Surface View End -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="@dimen/thumb_side"
+            android:layout_height="@dimen/thumb_side"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/ic_session" />
+        <ProgressBar
+            android:id="@+id/progress_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@android:style/Widget.Holo.ProgressBar.Small"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="5dp" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="75dp"
+        android:textSize="18dp"
+        android:textColor="#333" />
+
+    <TextView
+        android:id="@+id/category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="75dp"
+        android:layout_below="@+id/title"
+        android:textColor="#A4A4A4" />
+    <TextView
+        android:id="@+id/followers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:visibility="invisible"
+        android:padding="8dp"
+        android:text="Followers"
+        android:textColorHighlight="@android:color/holo_green_light"
+        android:background="@android:color/holo_green_light"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/lastMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="75dp"
+        android:layout_below="@+id/category"
+        android:textColor="#A4A4A4"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+
+
+</RelativeLayout>
+</com.livepost.javiergzzr.specialViews.SwipeLayout>
+</android.support.v7.widget.CardView>
