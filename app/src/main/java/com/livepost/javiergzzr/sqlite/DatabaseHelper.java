@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.livepost.javiergzzr.objects.Session;
+import com.livepost.javiergzzr.objects.Post;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addSessions(Session sessions) {
+    public void addSessions(Post sessions) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         //values.put(KEY_ID, sessions.getId());
@@ -60,8 +60,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public List<Session> getAllSessions() {
-        List<Session> sessionsList = new ArrayList<Session>();
+    public List<Post> getAllSessions() {
+        List<Post> sessionsList = new ArrayList<Post>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_SESSIONS;
 
@@ -72,11 +72,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 //(String author, String category, String lastMessage, String lastTime, String picture, long timestamp, String title)
-                Session session = new Session(cursor.getString(0), cursor.getString(1)
+                /*Post post = new Post(cursor.getString(0), cursor.getString(1)
                         , cursor.getString(2), cursor.getString(3), cursor.getString(4),cursor.getString(5), Long.getLong(cursor.getString(6))
-                        , cursor.getString(7));
+                        , cursor.getString(7));*/
                 // Adding contact to list
-                sessionsList.add(session);
+                //sessionsList.add(post);
             } while (cursor.moveToNext());
         }
 

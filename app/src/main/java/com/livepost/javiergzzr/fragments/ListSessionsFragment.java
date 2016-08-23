@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.database.DataSetObserver;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -18,29 +16,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.app.SearchManager;
 
-import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
-import com.livepost.javiergzzr.activities.MainActivity;
-import com.livepost.javiergzzr.activities.NewSession;
-import com.livepost.javiergzzr.activities.LoginActivity;
-import com.livepost.javiergzzr.adapters.SessionListAdapter;
+import com.livepost.javiergzzr.adapters.PostsListAdapter;
 import com.livepost.javiergzzr.adapters.ChatListOfflineAdapter;
 import com.livepost.javiergzzr.livepost.R;
-import com.livepost.javiergzzr.objects.Session;
-import com.livepost.javiergzzr.sqlite.DatabaseHelper;
 import com.livepost.javiergzzr.interfaces.OnFragmentInteractionListener;
-
-import java.util.List;
-import java.util.Map;
 
 public class ListSessionsFragment extends Fragment {
     private static final String TAG= "ListSessionsFragment";
@@ -54,7 +38,7 @@ public class ListSessionsFragment extends Fragment {
     private int mOrientation;
     private Firebase mFirebaseRef;
     private ValueEventListener mConnectedListener;
-    private SessionListAdapter mSessionListAdapter;
+    private PostsListAdapter mPostsListAdapter;
     private ChatListOfflineAdapter mOffileSessionsAdapter;
     private OnFragmentInteractionListener mOnFragmentInteractionListener;
 
@@ -69,7 +53,8 @@ public class ListSessionsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mFirebaseRef = new Firebase(getString(R.string.firebase_url)).child("sessions");
+        mFirebaseRef = new Firebase(getString(R.string.firebase_url)).child("posts");
+        Log.e(TAG,mFirebaseRef.toString());
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String k= getString(R.string.pref_key_home_mode);
         mOrientation = getResources().getConfiguration().orientation;
@@ -97,13 +82,13 @@ public class ListSessionsFragment extends Fragment {
         return view;
     }
     private void setupAdapter(final RecyclerView recyclerView){
-        mSessionListAdapter = new SessionListAdapter(mFirebaseRef.limitToLast(50),(AppCompatActivity)getActivity(), R.layout.item_session,mPresentationType,false);
-        recyclerView.setAdapter(mSessionListAdapter);
-        mSessionListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+        mPostsListAdapter = new PostsListAdapter(mFirebaseRef.limitToLast(50),(AppCompatActivity)getActivity(), R.layout.item_session,mPresentationType,false);
+        recyclerView.setAdapter(mPostsListAdapter);
+        mPostsListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {
                 super.onChanged();
-                //recyclerView.scrollToPosition(mSessionListAdapter.getItemCount() - 1);
+                //recyclerView.scrollToPosition(mPostsListAdapter.getItemCount() - 1);
                 recyclerView.scrollToPosition(0);
             }
         });
@@ -137,7 +122,7 @@ public class ListSessionsFragment extends Fragment {
     public void onStop() {
         super.onStop();
         mFirebaseRef.getRoot().child(".info/connected").removeEventListener(mConnectedListener);
-        mSessionListAdapter.cleanup();
+        mPostsListAdapter.cleanup();
     }
 
     @Override
@@ -155,43 +140,6 @@ public class ListSessionsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         //mListener = null;
-    }
-
-    private void saveSessions(){
-        Query listSessions = mFirebaseRef.limitToLast(10);
-        listSessions.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot snapshot, String previousChild) {
-                //System.out.println(snapshot.getKey() + " ==> " + snapshot.getValue());
-                DatabaseHelper db = new DatabaseHelper(getActivity());
-                //(String author, String category, String lastMessage, String lastTime, String picture, long timestamp, String title)
-                Map<String, String> session = (Map<String, String>) snapshot.getValue();
-                db.addSessions(new Session(session.get("author"), session.get("author_name"),session.get("category"), session.get("lastMessage"),
-                        session.get("lastTime"), session.get("picture"), Long.getLong(session.get("timestamp")),
-                        session.get("title")));
-                db.close();
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
     }
 
 

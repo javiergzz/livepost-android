@@ -9,14 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.livepost.javiergzzr.livepost.R;
-import com.livepost.javiergzzr.objects.Session;
+import com.livepost.javiergzzr.objects.Post;
 
 import java.util.List;
 
-public class ChatListOfflineAdapter extends ArrayAdapter<Session> {
+public class ChatListOfflineAdapter extends ArrayAdapter<Post> {
 
-    private List<Session> mItems;
-    public ChatListOfflineAdapter(Context context, int resource, List<Session> items) {
+    private List<Post> mItems;
+    public ChatListOfflineAdapter(Context context, int resource, List<Post> items) {
         super(context, resource, items);
         mItems = items;
     }
@@ -26,7 +26,7 @@ public class ChatListOfflineAdapter extends ArrayAdapter<Session> {
     }
 
     @Override
-    public Session getItem(int position) {
+    public Post getItem(int position) {
         return mItems.get(position);
     }
 
@@ -44,13 +44,12 @@ public class ChatListOfflineAdapter extends ArrayAdapter<Session> {
             v = vi.inflate(R.layout.item_session, null);
         }
 
-        Session s = getItem(position);
-        Log.d("LOL", s.getCategory());
+        Post s = getItem(position);
         if (s != null) {
             TextView txtTitle = (TextView) v.findViewById(R.id.title);
             TextView txtCategory = (TextView) v.findViewById(R.id.category);
             if (txtTitle != null) {
-                txtTitle.setText(s.getPicture());
+                txtTitle.setText(s.getPosts_picture());
             }
 
             if (txtCategory != null) {

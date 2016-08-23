@@ -19,7 +19,7 @@
     <string name="favorites_str">Favorites</string>
     <string name="new_session_str">Create Post</string>
     <string name="profile_str">Profile</string>
-    <!-- New Session -->
+    <!-- New Post -->
     <string name="lbl_description">What are you talking about?</string>
     <string name="txt_title">This is the title of your Session</string>
     <string name="lbl_category">What category does it fall into?</string>
@@ -139,8 +139,8 @@
     <string name="edit_title">Edit Post</string>
     <string name="edit_confirm">Edit</string>
     <string name="edit_delete">Delete Post</string>
-    <!-- Delete Session -->
-    <string name="delete_text">Are you sure you want to delete this session?</string>
+    <!-- Delete Post -->
+    <string name="delete_text">Are you sure you want to delete this post?</string>
     <string name="delete_confirm">Delete</string>
     <string name="delete_cancel">Cancel</string>
     <string name="title_activity_settings">Settings</string>

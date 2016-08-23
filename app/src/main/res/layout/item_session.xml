@@ -91,7 +91,7 @@
         android:layout_below="@+id/title"
         android:textColor="#A4A4A4" />
     <TextView
-        android:id="@+id/followers"
+        android:id="@+id/authorName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

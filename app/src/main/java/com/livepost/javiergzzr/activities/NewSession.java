@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -25,17 +24,14 @@ import android.widget.TextView;
 
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
 import com.livepost.javiergzzr.adapters.ExpandableListAdapter;
 import com.livepost.javiergzzr.asynctask.S3PutObjectTask;
 import com.livepost.javiergzzr.interfaces.OnPutImageListener;
 import com.livepost.javiergzzr.livepost.R;
-import com.livepost.javiergzzr.objects.Session;
+import com.livepost.javiergzzr.objects.Post;
 import com.livepost.javiergzzr.util.GV;
 import com.livepost.javiergzzr.util.Utilities;
-import com.livepost.javiergzzr.livepost.R;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -43,7 +39,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 public class NewSession extends ActionBarActivity implements OnPutImageListener{
     private static final String TAG_CLASS = "NewSession";
@@ -159,15 +154,13 @@ public class NewSession extends ActionBarActivity implements OnPutImageListener{
     private void saveSession(String url){
         SharedPreferences prefs = getSharedPreferences(CHAT_PREFS_KEY, 0);
         String mUsername = prefs.getString(USERNAME_KEY, null);
-        Firebase ref = new Firebase(getString(R.string.firebase_url)).child("sessions");
-        Calendar c = Calendar.getInstance();
-
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String lastTime = df.format(c.getTime());
-
-        Session session = new Session(mUsername, mUsername,txtCategory.getText().toString(),null,lastTime, getString(R.string.amazon_image_path) + url,
-                (int) (System.currentTimeMillis() / 1000L),txtDescription.getText().toString());
-        ref.push().setValue(session);
+        Firebase ref = new Firebase(getString(R.string.firebase_url)).child("posts");
+        //Calendar c = Calendar.getInstance();
+        //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long lastTime = System.currentTimeMillis()/ 1000L;
+        Post post = new Post(mUsername, mUsername,txtCategory.getText().toString(),true,null,lastTime, getString(R.string.amazon_image_path) + url,
+                lastTime,txtDescription.getText().toString());
+        ref.push().setValue(post);
         NewSession.this.finish();
     }
     @Override

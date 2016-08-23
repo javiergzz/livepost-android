@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     public boolean onQueryTextSubmit(String query) {
         String searchQuery = query.trim();
         if(query==null ||query.isEmpty()|| query =="") {
-            mSessionListAdapter = new SessionListAdapter(mFirebaseRef.child("sessions").limitToLast(50), this, R.layout.item_session,false);
+            mSessionListAdapter = new PostsListAdapter(mFirebaseRef.child("sessions").limitToLast(50), this, R.layout.item_session,false);
             mListView.setAdapter(mSessionListAdapter);
             mSessionListAdapter.notifyDataSetChanged();
             return false;
@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     public boolean onQueryTextChange(String newText) {
         newText = newText.trim();
         if(newText ==null || newText.isEmpty() || newText==""|| newText.length()<1) {
-            mSessionListAdapter = new SessionListAdapter(mFirebaseRef.child("sessions").limitToLast(50), this, R.layout.item_session,false);
+            mSessionListAdapter = new PostsListAdapter(mFirebaseRef.child("sessions").limitToLast(50), this, R.layout.item_session,false);
             mListView.setAdapter(mSessionListAdapter);
             mSessionListAdapter.notifyDataSetChanged();
             return true;
@@ -287,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     /*
     @Override
     public boolean onClose() {
-        mSessionListAdapter = new SessionListAdapter(mFirebaseRef.child("sessions").limitToLast(50), this, R.layout.item_session);
+        mSessionListAdapter = new PostsListAdapter(mFirebaseRef.child("sessions").limitToLast(50), this, R.layout.item_session);
         mListView.setAdapter(mSessionListAdapter);
         //mSessionListAdapter.notifyDataSetChanged();
         return true;
