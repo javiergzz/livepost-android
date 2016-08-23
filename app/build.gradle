@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 22
     buildToolsVersion '23.0.2'
 
     defaultConfig {
-        applicationId "com.livepost.javiergzzr.livepost"
+        applicationId "com.livepost.javiergzzr"
         minSdkVersion 15
         targetSdkVersion 22
         versionName "1.0"
